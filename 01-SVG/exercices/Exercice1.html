@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- 
+
+    Changer la couleur du rectangle ci-dessus en cliquant sur le rectangle (et revenir à la couleur initiale en cliquant une deuxième fois)
+
+ -->
+<html>
+<header>
+    <script type="module" defer src="./main.js">
+    </script>
+</header>
+<body>
+    <style>
+        .redRectangle{
+            width: 400px;
+            height: 100px;
+            left: 0px;
+            top:0px;
+            padding-right:0;
+        }
+    </style>
+    <div class="redRectangle" data-clickNumbers="0">
+        <!--Dessiner un rectangle rouge de 400px de largeur et 100px de hauteur -->
+        <svg width="400" height="100">
+            <rect x="0" y="0" width="400" height="100" fill="red"></rect>
+        </svg>
+    </div>
+</body>
+</html>

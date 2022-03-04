@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--Ecrivez votre prénom avec <path>-->
+
+<html>
+  <header>
+    <script type="module" defer src="./main.js"></script>
+  </header>
+
+  <body>
+    <style>
+      .donut {
+        width: 120px;
+        height: 120px;
+        left: 50px;
+        top: 50px;
+        padding-right: 0;
+      }
+    </style>
+
+    <svg width="2000" height="250">
+      <!-- Timo  -->
+      <path
+        fill="none"
+        stroke="red"
+        d="M 300 20 L 330 20 L 330 80 M 330 20 L360 20 
+            M 390 20 L 390 80 
+            M 430 20 L 430 80 M 430 20 L 460 80 M 460 80 L 490 20 M 490 20 L 490 80 
+            M 550 20 C 550 20, 490 50, 550 80
+            M 550 20 C 550 20, 610 50, 550 80"
+        id="motionPath3"
+      ></path>
+      <circle cx="" cy="" r="2" fill="blue">
+        <!-- Définir animation-->
+        <animateMotion dur="6s" repeatCount="indefinite">
+          <mpath xlink:href="#motionPath3" />
+        </animateMotion>
+      </circle>
+
+      <!--Karen-->
+      <!--dessiner chemin-->
+      <path
+        fill="none"
+        stroke="violet"
+        d=" M 2 20 L 2 90 L 40 20 M 26 45 L 50 90"
+        id="theMotionPath"
+      />
+      <!-- Créer élément à bouger-->
+      <circle cx="" cy="" r="2" fill="orange">
+        <!-- Définir animation-->
+        <animateMotion dur="2s" repeatCount="indefinite">
+          <mpath xlink:href="#theMotionPath" />
+        </animateMotion>
+      </circle>
+
+      <path
+        fill="none"
+        stroke="violet"
+        d="
+            M 85 45 L 95 90 M 87 52 C 87 52, 55 45, 53 67 C 53 67, 55 97, 94 85
+            M 105 45 L 105 90 M 105 87 C 105 47, 115 45, 120 47 C 120 47, 125 49, 130 57
+            M 141 65 H 177 C 177 65, 170 45, 156 45 C 156 45, 145 45, 141 65 C 141 65, 141 80, 149 85 C 149 85, 156 90, 177 87
+            M 188 45 L 188 90 M 188 65 C 190 52, 195 47, 202 45 C 207 45, 211 45, 215 52 C 215 52, 217 57, 220 65 L 226 90"
+        id="theMotionPath2"
+      />
+      <!-- éléments à bouger-->
+      <rect x="" y="" width="4" height="4" fill="green">
+        <!-- Animation -->
+        <animateMotion dur="6s" repeatCount="indefinite">
+          <mpath xlink:href="#theMotionPath2" />
+        </animateMotion>
+      </rect>
+    </svg>
+  </body>
+</html>

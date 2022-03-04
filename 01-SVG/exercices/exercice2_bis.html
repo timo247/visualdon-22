@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- 
+Agrandir le rayon extérieur du donut que vous avez créé on hover
+ -->
+<html>
+<header>
+    </script>
+</header>
+
+<body>
+    <style>
+        .donut {
+            width: 120px;
+            height: 120px;
+            left: 50px;
+            top: 50px;
+            padding-right: 0;
+        }
+
+        #cercleHover:hover {
+            r : 80 ;
+        }
+
+    </style>
+    <div class="donut" data-clickNumbers="0">
+        <!-- Créer un donut avec contours noirs, sans remplissage, centré en (50,50)
+        de rayon intérieur 30px et extérieur 60px-->
+        <svg width="400" height="400">
+            <circle class="internalCircle" cx="110" cy="110" r="30" stroke="black" fill="transparent"></circle>
+            <circle class="externalCircle" id="cercleHover" cx="110" cy="110" r="60" stroke="black" fill="transparent"></circle>
+        </svg>
+    </div>
+</body>
+
+</html>
