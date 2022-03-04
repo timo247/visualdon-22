@@ -34,3 +34,11 @@ let greenCirc = d3.select('.svgCircles')
     .attr("cy", "250px")
     .attr("r", "40")
     .attr("fill", "blue")
+
+
+
+    //changer la couleur du deuxième cercle
+let svgCircles = document.querySelector('.svgCircles');
+let secondCirc = svgCircles.children[1];
+secondCirc.setAttribute("fill", 'pink')
+console.log(svgCircles)
