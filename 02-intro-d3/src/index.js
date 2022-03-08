@@ -57,7 +57,7 @@ d3.select('.svgCircles')
 .attr("x", firstCirc.cx.baseVal.value - 25)
 .attr("y", firstCirc.cy.baseVal.value + 50)
 .attr("fill", "green")
-.text("text circle2");
+.text("text circle 1");
 
 
 
@@ -67,15 +67,54 @@ d3.select('.svgCircles')
 .attr("x", secondCirc.cx.baseVal.value - 25)
 .attr("y", secondCirc.cy.baseVal.value + 50)
 .attr("fill", "green")
-.text("text circle2");
+.text("text circle 2");
 
 d3.select('.svgCircles')   
 .append("text")  
 .attr("x", thirdCirc.cx.baseVal.value - 25)
 .attr("y", thirdCirc.cy.baseVal.value + 50)
 .attr("fill", "green")
-.text("text circle3");
+.text("text circle  3");
 
 
 
-//firstCirc.append(text1);
+//Alignement des cercles au clic
+
+thirdCirc.addEventListener('click', e => {
+  let initFirstCircXValue= 100;
+  let initSecondCircXValue = 200;
+  
+  if(firstCirc.getAttribute("cx") == "100" ){
+  firstCirc.setAttribute("cx", thirdCirc.cx.baseVal.value)
+  secondCirc.setAttribute("cx", thirdCirc.cx.baseVal.value)
+   } else {
+  firstCirc.setAttribute("cx", initFirstCircXValue)
+  secondCirc.setAttribute("cx", initSecondCircXValue)
+  }
+})
+
+
+//Réucpération des données
+// Ces données représentent la hauteur des rectangles que vous allez dessiner avec la méthode data(data).enter() que nous avons vue en cours. Les rectangles auront une largeur fixe de 20px et doivent être alignés en bas l'un à côté de l'autre (comme un graphique en batons ! 📊 )
+let data = [20, 5, 25, 8, 15];
+let rectWidth = 20;
+
+
+const rectSvg = d3.select(".rectangles")
+.append("svg")
+.attr("width", 100)
+.attr("height", 100)
+.attr("class", "svg-rect")
+
+//let rectSvg = document.querySelector('.svg-rect')
+console.log(rectSvg)
+
+  rectSvg.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("width", rectWidth)
+    .attr("height", d => d)
+    .attr("fill", "green")
+    .attr("y", d => 100 - d)
+    .attr("x", (d,i) => i*25+30)
