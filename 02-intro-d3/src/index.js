@@ -102,7 +102,7 @@ let rectWidth = 20;
 
 const rectSvg = d3.select(".rectangles")
 .append("svg")
-.attr("width", 100)
+.attr("width", 200)
 .attr("height", 100)
 .attr("class", "svg-rect")
 
