@@ -21,10 +21,52 @@ d3.json('../data/life_expectancy_years.csv')
 
 Promise.all([
     csv('income_per_person_gdppercapita_ppp_inflation_adjusted.csv'),
-    csv('life_expectancy_years.csv')
+    csv('life_expectancy_years.csv'),
+    csv('population_total.csv')
 ])
-    .then(([income, lifeExpectency]) => {
-    console.log(income, lifeExpectency)
+    .then(([income, lifeExpectency, population]) => {
+    console.log(income, lifeExpectency, population)
+
+
+    //Mise dans un tableau les revenus annuels 2021 de chacun des pays
+    let countries2021IncomeDatas = []
+    income.forEach(countryIncomes => {
+        countries2021IncomeDatas.push(countryIncomes['2021'])
+    });
+    //console.log(countries2021IncomeDatas)
+
+    //Mise dans un tableau de l'espérence de vie 2021 de chacun des pays
+    let countries2021LifeExpectancy = []
+    lifeExpectency.forEach(countryLifeExpectancies => {
+        countries2021LifeExpectancy.push(countryLifeExpectancies['2021'])
+    });
+    //console.log(countries2021LifeExpectancy)
+
+
+    let countries2021Populations = []
+    population.forEach(countryPopulations => {
+        countries2021Populations.push(countryPopulations["2021"])
+    });
+    //console.log(countries2021Populations)
+
+
+
+
+    //formatage des données 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //dessin
     const margin = { top: 10, right: 40, bottom: 10, left: 40 },
     width = 450 - margin.left - margin.right,
