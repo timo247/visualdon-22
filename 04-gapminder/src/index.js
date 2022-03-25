@@ -50,6 +50,34 @@ Promise.all([
     //console.log(countries2021Populations)
 
 
+    //Mise de tous les pays dans un seul tableau
+    let countries = []
+    income.forEach(countryIncome => {
+        //console.log(countryIncome["country"])
+        countries.push(countryIncome["country"]);
+    });
+    console.log(countries)
+
+
+    let countries2021Datas = []
+    //rassemblement des données des pays
+    //console.log(countries)
+    for(let i =0; i < income.length; i++ ){
+       let  countrieDatas = []
+       countrieDatas.country = countries[i];
+       countrieDatas.lifeExpectancy = countries2021LifeExpectancy[i]
+       countrieDatas.income =  countries2021IncomeDatas[i]
+       countrieDatas.population = countries2021Populations[i]
+       countries2021Datas.push(countrieDatas);
+       /*
+        countries2021Datas[i] = NaN
+        countries2021Datas[i]["country"] = countries[i];
+        countries2021Datas[i]["lifeExpectancy"] = countries2021LifeExpectancy[i]
+        countries2021Datas[i]["income"] = countries2021IncomeDatas[i]
+        countries2021Datas[i]["population"] = countries2021Populations[i]
+        */
+    }
+    console.log(countries2021Datas)
 
 
     //formatage des données 
