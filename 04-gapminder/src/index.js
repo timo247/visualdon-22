@@ -5,21 +5,6 @@ import { csv, json } from 'd3-fetch'
 // import file from '../data/data.csv'
 //console.log("bonjour");
 
-//récupération des données
-/*
-d3.json('../data/life_expectancy_years.csv')
-        .then( function(data) {
-            console.log(data)
-                const notesParEleve = data.reduce((r, d) => {
-                    const notes = r[d.nom] || []
-                    return { ...r, [d.nom]: [...notes, d.note] }
-            }, {})
-                  })
-        .catch(function(error){
-                console.log(error);
-                })
-                */
-
 Promise.all([
     csv('income_per_person_gdppercapita_ppp_inflation_adjusted.csv'),
     csv('life_expectancy_years.csv'),
@@ -92,7 +77,7 @@ Promise.all([
 
         //dessin
         const margin = { top: 10, right: 40, bottom: 10, left: 40 },
-            width = 450 - margin.left - margin.right,
+            width = 900 - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom;
         let translateHeight = height + 10;
         let translateWidth = width + 10;
@@ -117,7 +102,7 @@ Promise.all([
             .call(d3.axisBottom(x));
 
         const y = d3.scaleLinear()
-            .domain([0, 100])
+            .domain([0, 90])
             .range([height, 0])
 
         //axe y
@@ -125,14 +110,6 @@ Promise.all([
             .call(d3.axisLeft(y))
             .attr('class', "yAxis")
             .attr("transform", "translate(100, 10)")
-
-
-        svg.append("circle")
-            .attr("cx", x(10)).attr("cy", y(60)).attr("r", 40).style("fill", "blue");
-        svg.append("circle")
-            .attr("cx", x(50)).attr("cy", y(60)).attr("r", 40).style("fill", "red");
-        svg.append("circle")
-            .attr("cx", x(100)).attr("cy", y(60)).attr("r", 40).style("fill", "green");
 
 
         //Réagrandissement du svg pour que les axes s'affichent complètement
@@ -156,7 +133,7 @@ Promise.all([
             .attr("cx", d => x(d.income))
             .attr("cy", d => y(d.lifeExpectancy))
             .attr("r", d => rScaled(d.population))
-            .style("fill", "pink")
+            .style("fill", "rgba(0, 0, 0, 0.4)")
             .attr("transform", "translate(100, 10)")
             .attr("class", (d) => `countryCircle ${d.country}`)
 
