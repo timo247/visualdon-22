@@ -57,7 +57,7 @@ Promise.all([
             //console.log(countryIncome["country"])
             countries.push(countryIncome["country"]);
         });
-        console.log(countries)
+        //console.log(countries)
 
 
         let countries2021Datas = []
@@ -159,18 +159,31 @@ Promise.all([
             .style("fill", "pink")
             .attr("transform", "translate(100, 10)")
             .attr("class", (d) => `countryCircle ${d.country}`)
+
+            displayCountriesOnHover(countries2021Datas);
     });
 
-//Ajout du nom en dessous de chaque cercle
-let countryCircles = document.querySelectorAll('.countryCircle')
-console.log(countryCircles);
+
+
+//Affichage des informations lorsque le cercle est mouseover
+function displayCountriesOnHover(countriesData){
+    let countryCircles = document.querySelectorAll('.countryCircle')
+
 countryCircles.forEach(circle => {
-    circle.addEventListener('click', (e) => {
-        //e.target.className.remove("countryCircle")
-        console.log("click", e.target)
-        //console.log(e.target.getAttribute("class"))
+    circle.addEventListener('mouseover', (e) => {
+        e.target.classList.remove("countryCircle")
+
+        //Récupération des données du pays
+        let jsonCountry = countriesData.filter(jsonCountry => jsonCountry.country == e.target.getAttribute("class"));
+        console.log("json2",jsonCountry);
+        document.querySelector(".countryNameInfo").textContent = e.target.getAttribute("class");
+        document.querySelector(".income").textContent = "PIB par habitant: :" + jsonCountry[0].income + " $";
+        document.querySelector(".population").textContent = "Population: " + jsonCountry[0].population + " habitants";
+        document.querySelector(".lifeExpectancy").textContent ="Espérance de vie: " + jsonCountry[0].lifeExpectancy + " ans";
     })
 });
+}
+
 
 
 //Transformation des données numériques en données exploitables
