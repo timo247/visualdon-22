@@ -106,7 +106,7 @@ Promise.all([
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         const x = d3.scaleLinear()
-            .domain([0, 160000])
+            .domain([0, 130000])
             .range([0, width])
 
 
@@ -144,9 +144,9 @@ Promise.all([
 
 
         //Mise à l'échelle du rayon de chaque cercle
-        const rScaled = d3.scaleLinear()
+        const rScaled = d3.scaleSqrt()
             .domain([0, 5000000000])
-            .range([0, 100]);
+            .range([0, 30]);
 
         //DEssin des données sous forme de cercle
         svg.selectAll("countries")
