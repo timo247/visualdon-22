@@ -112,6 +112,21 @@ Promise.all([
             .attr("transform", "translate(100, 10)")
 
 
+        //Titre axe x
+        svg.append('text')
+            .attr("class", "xAxisTitle")  
+            .text("Income")
+            .attr("transform", "translate(300, 420)")
+
+
+            
+        //Titre axe y
+        svg.append('text')
+        .attr("class", "yAxisTitle") 
+        .text("Life expectancy") 
+        .attr("transform", "translate(100, 10)")
+
+
         //Réagrandissement du svg pour que les axes s'affichent complètement
         let svgToGrow = document.querySelector(".graphique");
         //console.log(svgToGrow)
@@ -139,6 +154,8 @@ Promise.all([
 
             displayCountriesOnHover(countries2021Datas);
     });
+
+
 
 
 
@@ -182,3 +199,5 @@ function cleanData(data, object) {
     }
     return data;
 }
+
+
