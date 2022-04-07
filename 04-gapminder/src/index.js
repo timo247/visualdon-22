@@ -5,6 +5,8 @@ import { csv, json } from 'd3-fetch'
 // import file from '../data/data.csv'
 //console.log("bonjour");
 
+
+
 Promise.all([
     csv('income_per_person_gdppercapita_ppp_inflation_adjusted.csv'),
     csv('life_expectancy_years.csv'),
@@ -77,8 +79,8 @@ Promise.all([
 
         //dessin
         const margin = { top: 10, right: 40, bottom: 10, left: 40 },
-            width = 900 - margin.left - margin.right,
-            height = 400 - margin.top - margin.bottom;
+            width = 900 - margin.left - margin.right;
+            let height = 400 - margin.top - margin.bottom;
         let translateHeight = height + 10;
         let translateWidth = width + 10;
         let svg = d3.select(".graphique");

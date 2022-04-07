@@ -47,6 +47,7 @@ Promise.all([
 
         //console.log(rectSvg)
 
+        //Dessin des rectangles
         rectSvg.selectAll("users")
             .data(users)
             //console.log("posts user1", users[1].posts.length)
