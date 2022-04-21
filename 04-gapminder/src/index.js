@@ -6,6 +6,7 @@ import { csv, json } from 'd3-fetch'
 //console.log("bonjour");
 
 
+let dataToUpdate= {data: []}
 
 Promise.all([
     csv('income_per_person_gdppercapita_ppp_inflation_adjusted.csv'),
@@ -70,6 +71,10 @@ Promise.all([
             data.income = cleanData(data.income)
             data.population = cleanData(data.population, data);
         });
+
+        // console.log("2", countries2021Datas)
+        dataToUpdate.data = countries2021Datas
+        console.log("3", dataToUpdate)
 
 
 
@@ -178,6 +183,8 @@ countryCircles.forEach(circle => {
         document.querySelector(".lifeExpectancy").textContent ="Espérance de vie: " + jsonCountry[0].lifeExpectancy + " ans";
     })
 });
+
+    drawMap();
 }
 
 
@@ -202,4 +209,104 @@ function cleanData(data, object) {
     return data;
 }
 
+// ==========================================================================
+//   1. Map
+// ==========================================================================
 
+function drawMap(){
+
+const legendWrapper = d3
+	.select("body")
+	.append("div")
+	.style("display", "flex")
+	.style("flex-direction", "column")
+	.style("align-items", "center")
+	.attr("class", "map");
+legendWrapper.append("h2").text("Life expectancy in year");
+
+const legend = legendWrapper
+	.append("div")
+	.attr("class", "legend")
+	.style("display", "flex")
+	.style("flex-direction", "row");
+
+// set data
+const countries = new Map();
+console.log("5", dataToUpdate)
+dataToUpdate.data.forEach((d) => {
+    console.log("4",d)
+	countries.set(d.country, d);
+});
+
+console.log(countries)
+// create svg
+const width2 = 800;
+const height2 = 600;
+const svgMap = legendWrapper
+	.append("svg")
+	.attr("width", width2)
+	.attr("height", height2);
+// Map and projection
+const projection = d3
+	.geoNaturalEarth1()
+	.scale(width2 / 1.3 / Math.PI - 50)
+	.translate([width2 / 2, height2 / 2]);
+// color interval
+const intervalsCount = 9; // max value is 9
+const domainInterval = 90 / intervalsCount;
+const intervals = [];
+for (let i = 0; i <= intervalsCount; i++) {
+	if (i != 0) {
+		intervals.push(i * domainInterval);
+	}
+}
+// color scale
+const colorScale = d3
+	.scaleThreshold()
+	.domain([...intervals])
+	.range(d3.schemeGreens[intervalsCount]);
+
+// Load external data and boot
+d3.json(
+	"https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
+).then(function (topo) {
+	// Draw the map
+	svgMap
+		.append("g")
+		.selectAll("path")
+		.data(topo.features)
+		.join("path")
+		.attr("fill", function (d) {
+			return colorScale(countries.get(d.properties.name)?.lifeExpectancy);
+		})
+		.attr("d", d3.geoPath().projection(projection))
+		.style("stroke", "#fff");
+});
+// Draw the legend
+let i = 0;
+intervals.forEach((d) => {
+	legend
+		.append("div")
+		.style("background-color", colorScale(d))
+		.style("width", "50px")
+		.style("height", "30px")
+		.style("display", "flex")
+		.style("justify-content", "center")
+		.style("align-items", "center")
+		.append("text")
+		.text(intervals[i].toFixed(1))
+		.style("color", "white");
+	i++;
+});
+legend
+	.append("div")
+	.style("width", "50px")
+	.style("background-color", "black")
+	.style("height", "30px")
+	.style("display", "flex")
+	.style("justify-content", "center")
+	.style("align-items", "center")
+	.append("text")
+	.text("no data")
+	.style("color", "white");
+}
