@@ -33,7 +33,7 @@ await browser.close();
 };
 */
 
-//capture d'écran
+//capture d'écran des cantons
 async function screenShotCantons () {
     // Lancement browser
       const browser = await puppeteer.launch();
@@ -50,4 +50,33 @@ async function screenShotCantons () {
     };
 
 
-    screenShotCantons();
+    async function showCantonsOnConsole(){
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto('https://fr.wikipedia.org/wiki/Canton_(Suisse)#Donn%C3%A9es_cantonales');
+        const tableCantons = await page.$('table.wikitable'); // document.querySelector
+
+
+
+        const result = await page.$$eval('table.wikitable tr', rows => {
+            return Array.from(rows, row => {
+              const columns = row.querySelectorAll('td');
+              return Array.from(columns, column => column.innerText);
+            });
+          });
+        console.log(result)
+
+        const cantonsTable = []
+
+        result.forEach(canton => {
+            let newCanton = [];
+            newCanton["canton"] = canton[0];
+            newCanton["population"] = canton[3];
+            cantonsTable.push(newCanton);
+        });
+
+        console.table(cantonsTable)
+    }
+
+   // screenShotCantons();
+   //showCantonsOnConsole();
